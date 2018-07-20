@@ -142,7 +142,7 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
 
     publishDate = release->getPublishDate().toString(Qt::DefaultLocaleLongDate);
     if (isCompatible) {
-        if (settingsCache->getUpdateReleaseChannel()->getName().toUtf8() == "Stable Releases")    # Stable Release
+        if (settingsCache->getUpdateReleaseChannel()->getName().toUtf8() == "Stable Releases") {    # Stable Release
             int reply;
             reply = QMessageBox::question(
                 this, tr("Update Available"),
@@ -151,7 +151,7 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
                     QString(":</b> %1 <a href=\"%2\">(").arg(publishDate, release->getDescriptionUrl()) + tr("Release Notes") +
                     ")</a><br><br>" + tr("Do you want to update now?"),
                 QMessageBox::Yes | QMessageBox::No);
-        else {    # Beta Release
+        } else {    # Beta Release
             int reply;
             reply = QMessageBox::question(
                 this, tr("Update Available"),
