@@ -237,7 +237,7 @@ void BetaReleaseChannel::releaseListFinished()
 
     // Make sure resultMap has all elements we'll need
     if (!resultMap.contains("assets") || !resultMap.contains("assets_url") || !resultMap.contains("name") ||
-        !resultMap.contains("published_at")) || !resultMap.contains("tag_name") ||
+        !resultMap.contains("published_at") || !resultMap.contains("tag_name") ||
         !resultMap.contains("target_commitish") {
         qWarning() << "Invalid received from the release update server:" << resultMap;
         emit error(tr("Invalid reply received from the release update server."));
