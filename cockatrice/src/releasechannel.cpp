@@ -110,8 +110,8 @@ void StableReleaseChannel::releaseListFinished()
     }
 
     // Make sure resultMap has all elements we'll need
-    if (!(resultMap.contains("name") && resultMap.contains("html_url") &&
-          resultMap.contains("published_at") && resultMap.contains("tag_name"))) {
+    if (!(resultMap.contains("name") && resultMap.contains("html_url") && resultMap.contains("published_at") &&
+          resultMap.contains("tag_name"))) {
         qWarning() << "Invalid received from the release update server:" << tmp;
         emit error(tr("Invalid reply received from the release update server."));
         return;
