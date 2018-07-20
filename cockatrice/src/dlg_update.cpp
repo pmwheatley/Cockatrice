@@ -149,8 +149,7 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
                 tr("A new version of Cockatrice is available!") + "<br><br>" + "<b>" + tr("New version") +
                     QString(":</b> %1<br>").arg(release->getName()) + "<b>" + tr("Released") +
                     QString(":</b> %1 <a href=\"%2\">(").arg(publishDate, release->getDescriptionUrl()) +
-                    tr("Release Notes") + ")</a><br><br>" +
-                    tr("Do you want to update now?"),
+                    tr("Release Notes") + ")</a><br><br>" + tr("Do you want to update now?"),
                 QMessageBox::Yes | QMessageBox::No);
         } else { // Beta Release
             reply = QMessageBox::question(
@@ -158,8 +157,7 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
                 tr("A new version of Cockatrice is available!") + "<br><br>" + "<b>" + tr("New version") +
                     QString(":</b> %1<br>").arg(release->getName()) + "<b>" + tr("Released") +
                     QString(":</b> %1 <a href=\"%2\">(").arg(publishDate, release->getDescriptionUrl()) +
-                    tr("Changelog") + ")</a><br><br>" +
-                    tr("Do you want to update now?"),
+                    tr("Changelog") + ")</a><br><br>" + tr("Do you want to update now?"),
                 QMessageBox::Yes | QMessageBox::No);
         }
         if (reply == QMessageBox::Yes)
