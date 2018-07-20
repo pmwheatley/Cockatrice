@@ -142,8 +142,8 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
 
     publishDate = release->getPublishDate().toString(Qt::DefaultLocaleLongDate);
     if (isCompatible) {
+        int reply;
         if (settingsCache->getUpdateReleaseChannel()->getName().toUtf8() == "Stable Releases") {    // Stable Release
-            int reply;
             reply = QMessageBox::question(
                 this, tr("Update Available"),
                 tr("A new version of Cockatrice is available!") + "<br><br>" + "<b>" + tr("New version") +
@@ -152,7 +152,6 @@ void DlgUpdate::finishedUpdateCheck(bool needToUpdate, bool isCompatible, Releas
                     ")</a><br><br>" + tr("Do you want to update now?"),
                 QMessageBox::Yes | QMessageBox::No);
         } else {    // Beta Release
-            int reply;
             reply = QMessageBox::question(
                 this, tr("Update Available"),
                 tr("A new version of Cockatrice is available!") + "<br><br>" + "<b>" + tr("New version") +
