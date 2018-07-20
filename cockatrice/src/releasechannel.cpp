@@ -109,8 +109,9 @@ void StableReleaseChannel::releaseListFinished()
         return;
     }
 
-    if (!(resultMap.contains("name") && resultMap.contains("html_url") && resultMap.contains("tag_name") &&
-          resultMap.contains("published_at"))) {
+    // Make sure resultMap has all elements we'll need
+    if (!(resultMap.contains("name") && resultMap.contains("html_url") &&
+          resultMap.contains("published_at") && resultMap.contains("tag_name"))) {
         qWarning() << "Invalid received from the release update server:" << tmp;
         emit error(tr("Invalid reply received from the release update server."));
         return;
@@ -235,9 +236,9 @@ void BetaReleaseChannel::releaseListFinished()
     }
 
     // Make sure resultMap has all elements we'll need
-    if (!resultMap.contains("assets") || !resultMap.contains("author") || !resultMap.contains("tag_name") ||
-        !resultMap.contains("target_commitish") || !resultMap.contains("assets_url") ||
-        !resultMap.contains("published_at")) {
+    if (!resultMap.contains("assets") || !resultMap.contains("assets_url") || !resultMap.contains("name") ||
+        !resultMap.contains("published_at")) || !resultMap.contains("tag_name") ||
+        !resultMap.contains("target_commitish") || {
         qWarning() << "Invalid received from the release update server:" << resultMap;
         emit error(tr("Invalid reply received from the release update server."));
         return;
@@ -247,11 +248,10 @@ void BetaReleaseChannel::releaseListFinished()
         lastRelease = new Release;
 
     lastRelease->setCommitHash(resultMap["target_commitish"].toString());
-    lastRelease->setPublishDate(resultMap["published_at"].toDate());
-
     QString shortHash = lastRelease->getCommitHash().left(GIT_SHORT_HASH_LEN);
-    lastRelease->setName(QString("%1 (%2)").arg(resultMap["tag_name"].toString()).arg(shortHash));
+    lastRelease->setName(resultMap["name"].toString());
     lastRelease->setDescriptionUrl(QString(BETARELEASE_CHANGESURL).arg(VERSION_COMMIT, shortHash));
+    lastRelease->setPublishDate(resultMap["published_at"].toDate());
 
     qDebug() << "Got reply from release server, size=" << resultMap.size() << "name=" << lastRelease->getName()
              << "desc=" << lastRelease->getDescriptionUrl() << "commit=" << lastRelease->getCommitHash()
