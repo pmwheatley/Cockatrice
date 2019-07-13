@@ -17,6 +17,7 @@ matrix:
     os: linux
     group: stable
     script: bash ./.ci/travis-lint.sh
+
  
 #TODO: set lint job (only one in this stage) to allowed-to-fail (but without fast finish)
 #https://docs.travis-ci.com/user/customizing-the-build/#rows-that-are-allowed-to-fail
