@@ -25,7 +25,7 @@ matrix:
   - stage: Compile / Build 🏗️
 
   #Ubuntu Bionic (on native Travis image)
-  - name: Ubuntu Bionic (Debug + Tests) [native Travis]
+  - name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
@@ -53,7 +53,7 @@ matrix:
         qtmultimedia5-dev \
     script: bash ./.ci/travis-compile.sh --server --install --test --debug
 
-  - name: Ubuntu Bionic (Release) [native Travis]
+  - name: Ubuntu Bionic / 18.04 LTS (Release) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
@@ -82,7 +82,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
   #Ubuntu Bionic (on Docker)
-    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests)
+    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [Docker]
     if: tag IS NOT present
     services: docker
     env: NAME=UbuntuBionic
@@ -95,7 +95,7 @@ matrix:
           "cockatrice_${NAME,,}"
           bash .ci/travis-compile.sh --server --install --test --debug
 
-  - name: Ubuntu Bionic / 18.04 LTS (Release)
+  - name: Ubuntu Bionic / 18.04 LTS (Release) [Docker]
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     services: docker
     env: NAME=UbuntuBionic
