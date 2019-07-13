@@ -24,6 +24,63 @@ matrix:
  
   - stage: Compile / Build 🏗️
 
+  #Ubuntu Bionic (on native Travis image)
+  - name: Ubuntu Bionic (Debug + Tests) [native Travis]
+    if: tag IS NOT present
+    os: linux
+    dist: bionic
+    group: stable
+    install:
+    - sudo apt-get update
+    - sudo apt-get install -y --no-install-recommends \
+        build-essential \
+        clang-format \
+        file \
+        g++ \
+        git \
+        ccache \
+        cmake \
+        liblzma-dev \
+        libprotobuf-dev \
+        libqt5multimedia5-plugins \
+        libqt5svg5-dev \
+        libqt5sql5-mysql \
+        libqt5websockets5-dev \
+        protobuf-compiler \
+        qt5-default \
+        qttools5-dev \
+        qttools5-dev-tools \
+        qtmultimedia5-dev \
+    script: bash ./.ci/travis-compile.sh --server --install --test --debug
+
+  - name: Ubuntu Bionic (Release) [native Travis]
+    if: tag IS NOT present
+    os: linux
+    dist: bionic
+    group: stable
+    install:
+    - sudo apt-get update
+    - sudo apt-get install -y --no-install-recommends \
+        build-essential \
+        clang-format \
+        file \
+        g++ \
+        git \
+        ccache \
+        cmake \
+        liblzma-dev \
+        libprotobuf-dev \
+        libqt5multimedia5-plugins \
+        libqt5svg5-dev \
+        libqt5sql5-mysql \
+        libqt5websockets5-dev \
+        protobuf-compiler \
+        qt5-default \
+        qttools5-dev \
+        qttools5-dev-tools \
+        qtmultimedia5-dev \
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
+
   #Ubuntu Bionic (on Docker)
     name: Ubuntu Bionic / 18.04 LTS (Debug + Tests)
     if: tag IS NOT present
