@@ -163,7 +163,7 @@ matrix:
     group: stable
     script: bash ./.ci/travis-compile.sh --server --test
 
-#  - stage: Deploy
+#  - stage: Deploy 🚀
 #    if: branch = master
 # github releases
 # script --> flatpak @flathub
