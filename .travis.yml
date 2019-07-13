@@ -53,6 +53,8 @@ matrix:
         qtmultimedia5-dev \
     script: bash ./.ci/travis-compile.sh --server --install --test --debug
 
+#better add "- stage" to all? or some other comment formatting?
+#stage ordering with as in https://docs.travis-ci.com/user/build-stages/#specifying-stage-order-and-conditions?
   - name: Ubuntu Bionic / 18.04 LTS (Release) [native Travis]
     if: tag IS NOT present
     os: linux
