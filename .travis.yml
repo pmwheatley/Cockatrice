@@ -65,6 +65,7 @@ matrix:
     os: linux
     dist: bionic
     group: stable
+    services: none
     addons:
       apt:
         packages:
@@ -86,6 +87,7 @@ matrix:
     os: linux
     dist: bionic
     group: stable
+    services: none
     addons:
       apt:
         packages:
