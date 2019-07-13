@@ -22,7 +22,7 @@ matrix:
 #https://docs.travis-ci.com/user/customizing-the-build/#fast-finishing
 #https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
  
-  - stage: Compile / Build 🏗️ 👷
+  - stage: Compile / Build 🏗️ 👷 👨‍🔧
 
   #Ubuntu Bionic (on native Travis image)
     name: Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
