@@ -9,7 +9,7 @@ matrix:
 
 #https://docs.travis-ci.com/user/build-stages/
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
-  - stage: Static Code Analysis 🕵️
+  - stage: Static Code Analysis 🕵️ 👮
 
     name: Source Code Style & Error Checking (Lint)
     if: tag IS NOT present
@@ -212,7 +212,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
 
-  - stage: Dynamic Program Analysis 🔬 👨‍🔬
+  - stage: Dynamic Program Analysis 🔬 👨‍🔬 👨‍⚕️
 
     #add allowed-to-fail to make it run even if there is a problem with one of the builds?
     #debug? docker?
@@ -222,7 +222,7 @@ matrix:
     group: stable
     script: bash ./.ci/travis-compile.sh --server --test
 
-#  - stage: Deploy 🚀 👨‍✈️
+#  - stage: Deploy 🚀 👨‍✈️ 👨‍🚀
 #    if: branch = master
 # github releases
 # script --> flatpak @flathub
