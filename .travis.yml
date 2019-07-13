@@ -25,7 +25,7 @@ matrix:
   - stage: Compile / Build 🏗️
 
   #Ubuntu Bionic (on native Travis image)
-    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [native Travis]
+    name: Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
@@ -51,7 +51,7 @@ matrix:
         qttools5-dev \
         qttools5-dev-tools \
         qtmultimedia5-dev \
-    script: bash ./.ci/travis-compile.sh --server --install --test --debug
+    script: bash ./.ci/travis-compile.sh --server --install --debug
 
 #better add "- stage" to all? or some other comment formatting?
 #stage ordering with as in https://docs.travis-ci.com/user/build-stages/#specifying-stage-order-and-conditions?
@@ -84,7 +84,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
   #Ubuntu Bionic (on Docker)
-    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [Docker]
+    name: Ubuntu Bionic / 18.04 LTS (Debug) [via Docker]
     if: tag IS NOT present
     services: docker
     env: NAME=UbuntuBionic
@@ -95,9 +95,9 @@ matrix:
     script: docker run --mount "type=bind,source=$(pwd),target=/src" -w="/src"
           --mount "type=bind,source=$HOME/$NAME/.ccache,target=/.ccache" -e "CCACHE_DIR=/.ccache"
           "cockatrice_${NAME,,}"
-          bash .ci/travis-compile.sh --server --install --test --debug
+          bash .ci/travis-compile.sh --server --install --debug
 
-  - name: Ubuntu Bionic / 18.04 LTS (Release) [Docker]
+  - name: Ubuntu Bionic / 18.04 LTS (Release) [via Docker]
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     services: docker
     env: NAME=UbuntuBionic
