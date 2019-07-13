@@ -25,7 +25,7 @@ matrix:
   - stage: Compile / Build 🏗️
 
   #Ubuntu Bionic (on native Travis image)
-  - name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [native Travis]
+    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
