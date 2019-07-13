@@ -65,6 +65,7 @@ matrix:
     os: linux
     dist: bionic
     group: stable
+    cache: ccache
     services: none
     addons:
       apt:
@@ -80,6 +81,7 @@ matrix:
         - qt5-default
         - qttools5-dev
         - qttools5-dev-tools
+    before_install: skip
     script: bash ./.ci/travis-compile.sh --server --install --debug
 
   - name: Ubuntu Bionic / 18.04 LTS (Release) [native Travis]
@@ -87,6 +89,7 @@ matrix:
     os: linux
     dist: bionic
     group: stable
+    cache: ccache
     services: none
     addons:
       apt:
@@ -102,6 +105,7 @@ matrix:
         - qt5-default
         - qttools5-dev
         - qttools5-dev-tools
+    before_install: skip
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
 
