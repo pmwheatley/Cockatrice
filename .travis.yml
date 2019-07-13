@@ -7,16 +7,25 @@ git:
 matrix:
   include:
 
-  #Static Code Analysis
-  - name: Check code style / Linting
+#https://docs.travis-ci.com/user/build-stages/
+#https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
+  - stage: 🕵️ Static Code Analysis
+
+    name: Source Code Style And Error Checking (Lint)
     if: tag IS NOT present
     os: linux
     group: stable
     script: bash ./.ci/travis-lint.sh
-
+ 
+#TODO: set lint job (only one in this stage) to allowed-to-fail (but without fast finish)
+#https://docs.travis-ci.com/user/customizing-the-build/#rows-that-are-allowed-to-fail
+#https://docs.travis-ci.com/user/customizing-the-build/#fast-finishing
+#https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
+ 
+  - stage: Compiling
 
   #Ubuntu Bionic (on Docker)
-  - name: Ubuntu Bionic (Debug + Tests)
+    name: Ubuntu Bionic (Debug + Tests)
     if: tag IS NOT present
     services: docker
     env: NAME=UbuntuBionic
@@ -27,7 +36,7 @@ matrix:
     script: docker run --mount "type=bind,source=$(pwd),target=/src" -w="/src"
           --mount "type=bind,source=$HOME/$NAME/.ccache,target=/.ccache" -e "CCACHE_DIR=/.ccache"
           "cockatrice_${NAME,,}"
-          bash .ci/travis-compile.sh --server --test --debug
+          bash .ci/travis-compile.sh --server --install --test --debug
 
   - name: Ubuntu Bionic (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
@@ -43,14 +52,14 @@ matrix:
           bash .ci/travis-compile.sh --server --package "$NAME" --release
 
 
-  #macOS
-  - name: macOS (Debug)
+  #macOS 10.12
+  - name: macOS 10.12 (Debug)
     if: tag IS NOT present
     os: osx
     osx_image: xcode9.2
     cache:
-    - ccache
-    - directories:
+      ccache: true
+      directories:
       - $HOME/Library/Caches/Homebrew
     addons:
       homebrew:
@@ -64,13 +73,14 @@ matrix:
     before_cache:
     - brew cleanup
 
-  - name: macOS (Release)
+  - name: macOS 10.12 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
     osx_image: xcode9.2
+    env: NAME=Sierra
     cache:
-    - ccache
-    - directories:
+      ccache: true
+      directories:
       - $HOME/Library/Caches/Homebrew
     addons:
       homebrew:
@@ -80,9 +90,82 @@ matrix:
         - qt
         - xz
         update: true
-    script: bash ./.ci/travis-compile.sh --server --package "$TRAVIS_OS_NAME" --release
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
     before_cache:
     - brew cleanup
+
+  #macOS 10.14
+  - name: macOS 10.14 (Debug)
+    if: tag IS NOT present
+    os: osx
+    osx_image: xcode11
+    cache:
+      ccache: true
+      directories:
+      - $HOME/Library/Caches/Homebrew
+    addons:
+      homebrew:
+        packages:
+        - ccache
+        - protobuf
+        - qt
+        - xz
+        update: true
+    script: bash ./.ci/travis-compile.sh --server --install --debug
+    before_cache:
+    - brew cleanup
+
+  - name: macOS 10.14 (Release)
+    if: (branch = master AND NOT type = pull_request) OR tag IS present
+    os: osx
+    osx_image: xcode11
+    env: NAME=Mojave
+    cache:
+      ccache: true
+      directories:
+      - $HOME/Library/Caches/Homebrew
+    addons:
+      homebrew:
+        packages:
+        - ccache
+        - protobuf
+        - qt
+        - xz
+        update: true
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
+    before_cache:
+    - brew cleanup
+
+
+  #Windows
+  #https://docs.travis-ci.com/user/reference/windows/
+  - name: Windows (Debug)
+    if: tag IS NOT present
+    os: windows
+    cache: true
+    script: bash ./.ci/travis-compile.sh --server --install --debug
+
+  - name: Windows (Release)
+    if: (branch = master AND NOT type = pull_request) OR tag IS present
+    os: windows
+    env: NAME=win
+    cache: true
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
+
+
+  - stage: Dynamic Program Analysis
+
+    #debug? docker?
+    name: Unit Tests
+    if: tag IS NOT present
+    os: linux
+    group: stable
+    script: bash ./.ci/travis-compile.sh --server --test
+
+#  - stage: Deploy
+#    if: branch = master
+# github releases
+# script --> flatpak @flathub
 
 
 # Builds for pull requests skip the deployment step altogether
