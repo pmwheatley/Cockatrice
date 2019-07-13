@@ -9,9 +9,9 @@ matrix:
 
 #https://docs.travis-ci.com/user/build-stages/
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
-  - stage: 🕵️ Static Code Analysis
+  - stage: Static Code Analysis 🕵️
 
-    name: Source Code Style And Error Checking (Lint)
+    name: Source Code Style & Error Checking (Lint)
     if: tag IS NOT present
     os: linux
     group: stable
@@ -22,7 +22,7 @@ matrix:
 #https://docs.travis-ci.com/user/customizing-the-build/#fast-finishing
 #https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
  
-  - stage: Compiling
+  - stage: Compiling 🏗️
 
   #Ubuntu Bionic (on Docker)
     name: Ubuntu Bionic (Debug + Tests)
@@ -153,7 +153,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
 
-  - stage: Dynamic Program Analysis
+  - stage: Dynamic Program Analysis 🔬
 
     #debug? docker?
     name: Unit Tests
