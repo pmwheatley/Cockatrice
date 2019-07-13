@@ -22,10 +22,10 @@ matrix:
 #https://docs.travis-ci.com/user/customizing-the-build/#fast-finishing
 #https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
  
-  - stage: Compiling 🏗️
+  - stage: Compile / Build 🏗️
 
   #Ubuntu Bionic (on Docker)
-    name: Ubuntu Bionic (Debug + Tests)
+    name: Ubuntu Bionic / 18.04 LTS (Debug + Tests)
     if: tag IS NOT present
     services: docker
     env: NAME=UbuntuBionic
@@ -38,7 +38,7 @@ matrix:
           "cockatrice_${NAME,,}"
           bash .ci/travis-compile.sh --server --install --test --debug
 
-  - name: Ubuntu Bionic (Release)
+  - name: Ubuntu Bionic / 18.04 LTS (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     services: docker
     env: NAME=UbuntuBionic
@@ -53,7 +53,7 @@ matrix:
 
 
   #macOS 10.12
-  - name: macOS 10.12 (Debug)
+  - name: macOS Sierra / 10.12 (Debug)
     if: tag IS NOT present
     os: osx
     osx_image: xcode9.2
@@ -73,7 +73,7 @@ matrix:
     before_cache:
     - brew cleanup
 
-  - name: macOS 10.12 (Release)
+  - name: macOS Sierra / 10.12 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
     osx_image: xcode9.2
@@ -95,7 +95,7 @@ matrix:
     - brew cleanup
 
   #macOS 10.14
-  - name: macOS 10.14 (Debug)
+  - name: macOS Mojave / 10.14 (Debug)
     if: tag IS NOT present
     os: osx
     osx_image: xcode11
@@ -115,7 +115,7 @@ matrix:
     before_cache:
     - brew cleanup
 
-  - name: macOS 10.14 (Release)
+  - name: macOS Mojave / 10.14 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
     osx_image: xcode11
@@ -139,13 +139,13 @@ matrix:
 
   #Windows
   #https://docs.travis-ci.com/user/reference/windows/
-  - name: Windows (Debug)
+  - name: Windows Server 10 / 1803 (Debug)
     if: tag IS NOT present
     os: windows
     cache: true
     script: bash ./.ci/travis-compile.sh --server --install --debug
 
-  - name: Windows (Release)
+  - name: Windows Server 10 / 1803 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: windows
     env: NAME=win
@@ -155,6 +155,7 @@ matrix:
 
   - stage: Dynamic Program Analysis 🔬
 
+    #add allowed-to-fail to make it run even if there is a problem with one of the builds?
     #debug? docker?
     name: Unit Tests
     if: tag IS NOT present
