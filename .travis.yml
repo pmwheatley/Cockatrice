@@ -52,6 +52,9 @@ matrix:
     - ccache
     - directories:
       - $HOME/Library/Caches/Homebrew
+      
+      #https://stackoverflow.com/questions/39930171/cache-brew-builds-with-travis-ci/57017412#57017412
+      #also see before_cache step
       - /usr/local/Homebrew
     addons:
       homebrew:
