@@ -52,6 +52,10 @@ matrix:
     - ccache
     - directories:
       - $HOME/Library/Caches/Homebrew
+      - /usr/local/Cellar/ccache
+      - /usr/local/Cellar/protobuf
+      - /usr/local/Cellar/qt
+      - /usr/local/Cellar/xz
     addons:
       homebrew:
         packages:
