@@ -67,7 +67,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --install --debug
     before_cache:
     - brew cleanup
-    - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
+    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then find /usr/local/Homebrew \! -regex ".+\.git.+" -delete; fi
 
   - name: macOS (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
