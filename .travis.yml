@@ -52,6 +52,7 @@ matrix:
     - ccache
     - directories:
       - $HOME/Library/Caches/Homebrew
+      - /usr/local/Homebrew
     addons:
       homebrew:
         packages:
@@ -63,6 +64,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --install --debug
     before_cache:
     - brew cleanup
+    - find /usr/local/Homebrew \! -regex ".+\.git.+" -delete
 
   - name: macOS (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
