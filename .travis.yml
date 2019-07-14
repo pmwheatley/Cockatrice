@@ -168,7 +168,7 @@ matrix:
         - protobuf
         - qt
         - xz
-        update: true
+       # update: true
     script: bash ./.ci/travis-compile.sh --server --install --debug
     before_cache:
     - brew cleanup
@@ -189,7 +189,7 @@ matrix:
         - protobuf
         - qt
         - xz
-        update: true
+       # update: true
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
     before_cache:
     - brew cleanup
