@@ -17,7 +17,7 @@ AbstractCardDragItem::AbstractCardDragItem(AbstractCardItem *_item,
     if (parentDrag) {
         parentDrag->addChildDrag(this);
         setZValue(2000000007 + hotSpot.x() * 1000000 + hotSpot.y() * 1000 + 1000);
-    } else {
+      } else {
         if ((hotSpot.x() < 0) || (hotSpot.y() < 0)) {
             qDebug() << "CardDragItem: coordinate overflow: x =" << hotSpot.x() << ", y =" << hotSpot.y();
             hotSpot = QPointF();
