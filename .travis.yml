@@ -28,6 +28,8 @@ matrix:
           --mount "type=bind,source=$HOME/$NAME/.ccache,target=/.ccache" -e "CCACHE_DIR=/.ccache"
           "cockatrice_${NAME,,}"
           bash .ci/travis-compile.sh --server --test --debug
+    before_cache:
+    - ccache -z
 
   - name: Ubuntu Bionic (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
@@ -41,6 +43,8 @@ matrix:
           --mount "type=bind,source=$HOME/$NAME/.ccache,target=/.ccache" -e "CCACHE_DIR=/.ccache"
           "cockatrice_${NAME,,}"
           bash .ci/travis-compile.sh --server --package "$NAME" --release
+    before_cache:
+    - ccache -z
 
 
   #macOS
@@ -63,6 +67,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --install --debug
     before_cache:
     - brew cleanup
+    - ccache -z
 
   - name: macOS (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
@@ -83,6 +88,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --package "$TRAVIS_OS_NAME" --release
     before_cache:
     - brew cleanup
+    - ccache -z
 
 
 # Builds for pull requests skip the deployment step altogether
