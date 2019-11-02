@@ -232,7 +232,7 @@ matrix:
     script: bash ./.ci/travis-compile.sh --server --test
 
   - stage: Deploy  👨‍✈️
-    #more emoji ideas: 🚀 📦 🚢 🛳️ 👨‍🚀
+    #more emoji ideas: 🚀 📦 🚢 🛳️ 👨‍🚀🚁🛫✈️
 
     name: flatpak (hosted @ Flathub)
     if: (branch = master AND NOT type = pull_request) AND tag IS present
