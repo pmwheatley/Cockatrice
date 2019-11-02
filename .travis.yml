@@ -234,10 +234,28 @@ matrix:
   - stage: Deploy  👨‍✈️
     #more emoji ideas: 🚀 📦 🚢 🛳️ 👨‍🚀
 
+    name: flatpak (hosted @ Flathub)
     if: (branch = master AND NOT type = pull_request) AND tag IS present
-# github releases
+    os: linux
+    group: stable
+    script: bash ./.ci/travis-deploy.sh --flatpak
 # script --> flatpak @flathub
+# send PR/commit change? to flathub repo: https://github.com/flathub/io.github.Cockatrice.cockatrice
 
+  - name: GitHub Releases
+    if: (branch = master AND NOT type = pull_request) AND tag IS present
+    os: linux
+    group: stable
+    script: bash ./.ci/travis-deploy.sh --github
+# only check if release is created and files got deployed and uploaded correctly from former builds
+# test downloads
+
+  - name: GitHub Pages
+    if: (branch = master AND NOT type = pull_request) AND tag IS present
+    os: linux
+    group: stable
+    script: bash ./.ci/travis-deploy.sh --github
+# send PR/commit change? with updated announcement + link to GH Releases
 
 # Builds for pull requests skip the deployment step altogether
 deploy:
