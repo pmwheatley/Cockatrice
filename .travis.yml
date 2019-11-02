@@ -9,14 +9,20 @@ matrix:
 
 #https://docs.travis-ci.com/user/build-stages/
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
-  - stage: Static Code Analysis 🕵️
-    #more emoji ideas: 👮 👨‍⚖️ 🔍
+  - stage: Static Code Analysis / Documentation 🕵️
+    #more emoji ideas: 👮 👨‍⚖️ 
 
-    name: Source Code Style & Error Checking (Lint)
+    name: 🔍 Source Code Style & Error Checking (Lint)
     if: tag IS NOT present
     os: linux
     group: stable
     script: bash ./.ci/travis-lint.sh
+    
+  - name: 📖 Changelog updated?
+    if: tag IS NOT present
+    os: linux
+    group: stable
+    script: bash ./.ci/travis-changelog.sh
 
  
 #TODO: set lint job (only one in this stage) to allowed-to-fail (but without fast finish)
