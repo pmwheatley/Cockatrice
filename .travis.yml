@@ -87,8 +87,8 @@ matrix:
         - libqt5sql5-mysql
         - libqt5websockets5-dev
         - protobuf-compiler
-        - qtmultimedia5-dev
         - qt5-default
+        - qtmultimedia5-dev
         - qttools5-dev
         - qttools5-dev-tools
     before_install: skip
@@ -111,8 +111,8 @@ matrix:
         - libqt5sql5-mysql
         - libqt5websockets5-dev
         - protobuf-compiler
-        - qtmultimedia5-dev
         - qt5-default
+        - qtmultimedia5-dev
         - qttools5-dev
         - qttools5-dev-tools
     before_install: skip
