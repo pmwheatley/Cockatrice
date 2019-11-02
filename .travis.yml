@@ -257,6 +257,16 @@ jobs:
     script: bash ./.ci/travis-deploy.sh --github
 # send PR/commit change? with updated announcement + link to GH Releases
 
+#  - stage: Cleanup
+#    #more emoji ideas: 
+#
+# bump version number in cmake to next patch version at least. or have some other check at other destination which makes sure version is different than last release
+#    name: After release tidy-up
+#    if: (branch = master AND NOT type = pull_request) AND tag IS present
+#    os: linux
+#    group: stable
+#    script: 
+
 # Builds for pull requests skip the deployment step altogether
 deploy:
 # Deploy configuration for "beta" releases
