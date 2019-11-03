@@ -68,9 +68,9 @@ jobs:
 
 
   #Ubuntu Bionic (on native Travis image)
-    #Doenst work yet for some reason and always uses same config used for bionic docker biuld on default 14.04 image,
-    #therefore I tried to double some entries here again. The initial template was the normal, old 14.04 build
-    name: Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
+   #Doenst work yet for some reason and always uses same config used for bionic docker biuld on default 14.04 image,
+   #therefore I tried to double some entries here again. The initial template was the normal, old 14.04 build
+  - name: Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
