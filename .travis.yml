@@ -119,11 +119,11 @@ jobs:
     script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
 
 
-  #macOS 10.12
-  - name: macOS Sierra / 10.12 (Debug)
+  #macOS 10.13
+  - name: macOS High Sierra / 10.13 (Debug)
     if: tag IS NOT present
     os: osx
-    osx_image: xcode9.2
+    osx_image: xcode10.1
     cache:
       ccache: true
       directories:
@@ -140,10 +140,10 @@ jobs:
     before_cache:
     - brew cleanup
 
-  - name: macOS Sierra / 10.12 (Release)
+  - name: macOS High Sierra / 10.13 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
-    osx_image: xcode9.2
+    osx_image: xcode10.1
     env: NAME=Sierra
     cache:
       ccache: true
@@ -157,7 +157,7 @@ jobs:
         - qt
         - xz
         update: true
-    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
+    script: bash ./.ci/travis-compile.sh --server --package "macos$OSX_VERSION" --release
     before_cache:
     - brew cleanup
 
@@ -199,7 +199,7 @@ jobs:
         - qt
         - xz
         update: true
-    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
+    script: bash ./.ci/travis-compile.sh --server --package "macos$OSX_VERSION" --release --zip
     before_cache:
     - brew cleanup
 
