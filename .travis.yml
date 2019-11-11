@@ -10,7 +10,7 @@ jobs:
 #https://docs.travis-ci.com/user/build-stages/
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
   - stage: Static Code Analysis / Documentation 🕵️
-    #more emoji ideas: 👮 👨‍⚖️ 
+    #more emoji ideas: 👮 👨‍⚖️  // 🔍 / 🖊️✏️🖋️🖉 / 📝📋📃📑📄📖
 
     name: 🔍 Source Code Style & Error Checking (Lint)
     if: tag IS NOT present
@@ -31,7 +31,7 @@ jobs:
 #https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
  
   - stage: Compile / Build 👷
-    #more emoji ideas: ⚙️🔧🏗️ 👨‍🔧 (different ones for debug/release?)
+    #more emoji ideas: 👨‍🔧 // ⚙️🔧 / 🏗️  (different ones for debug/release?)
 
   #Ubuntu Bionic (on Docker)
     name: 🏗️ Ubuntu Bionic / 18.04 LTS (Debug) [via Docker]
@@ -221,7 +221,7 @@ jobs:
 
 
   - stage: Dynamic Program Analysis 👨‍🔬
-    #more emoji ideas: 🧪 🧬 🔬 👨‍⚕️
+    #more emoji ideas: 👨‍⚕️ // 🧪🧬🔬 
 
     #add allowed-to-fail to make it run even if there is a problem with one of the builds?
     #debug? docker?
@@ -233,7 +233,7 @@ jobs:
 
 
   - stage: Deploy  👨‍✈️
-    #more emoji ideas: 🚀 📦 🚢 🛳️ 👨‍🚀🚁🛫✈️
+    #more emoji ideas: 👨‍🚀 // 🚀🚢🛳️🚁🛫✈️ / 📦 
 
     name: 📦 flatpak (hosted @ Flathub)
     if: (branch = master AND NOT type = pull_request) AND tag IS present
