@@ -31,10 +31,10 @@ jobs:
 #https://github.com/travis-ci/travis-ci/issues/8998#issuecomment-354833771 
  
   - stage: Compile / Build 👷
-    #more emoji ideas: 🏗️ 👨‍🔧
+    #more emoji ideas: ⚙️🔧🏗️ 👨‍🔧 (different ones for debug/release?)
 
   #Ubuntu Bionic (on Docker)
-    name: Ubuntu Bionic / 18.04 LTS (Debug) [via Docker]
+    name: 🏗️ Ubuntu Bionic / 18.04 LTS (Debug) [via Docker]
     if: tag IS NOT present
     os: linux
     group: stable
@@ -51,7 +51,7 @@ jobs:
 
   #better add "- stage" to all? or some other comment formatting?
   #stage ordering with as in https://docs.travis-ci.com/user/build-stages/#specifying-stage-order-and-conditions?
-  - name: Ubuntu Bionic / 18.04 LTS (Release) [via Docker]
+  - name: 🏗️ Ubuntu Bionic / 18.04 LTS (Release) [via Docker]
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: linux
     group: stable
@@ -70,7 +70,7 @@ jobs:
   #Ubuntu Bionic (on native Travis image)
    #Doenst work yet for some reason and always uses same config used for bionic docker biuld on default 14.04 image,
    #therefore I tried to double some entries here again. The initial template was the normal, old 14.04 build
-  - name: Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
+  - name: 🏗️ Ubuntu Bionic / 18.04 LTS (Debug) [native Travis]
     if: tag IS NOT present
     os: linux
     dist: bionic
@@ -94,7 +94,7 @@ jobs:
     before_install: skip
     script: bash ./.ci/travis-compile.sh --server --install --debug
 
-  - name: Ubuntu Bionic / 18.04 LTS (Release) [native Travis]
+  - name: 🏗️ Ubuntu Bionic / 18.04 LTS (Release) [native Travis]
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: linux
     dist: bionic
@@ -120,7 +120,7 @@ jobs:
 
 
   #macOS 10.13
-  - name: macOS High Sierra / 10.13 (Debug)
+  - name: 🏗️ macOS High Sierra / 10.13 (Debug)
     if: tag IS NOT present
     os: osx
     osx_image: xcode10.1
@@ -140,7 +140,7 @@ jobs:
     before_cache:
     - brew cleanup
 
-  - name: macOS High Sierra / 10.13 (Release)
+  - name: 🏗️ macOS High Sierra / 10.13 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
     osx_image: xcode10.1
@@ -157,12 +157,12 @@ jobs:
         - qt
         - xz
         update: true
-    script: bash ./.ci/travis-compile.sh --server --package "macos$OSX_VERSION" --release
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release
     before_cache:
     - brew cleanup
 
   #macOS 10.14
-  - name: macOS Mojave / 10.14 (Debug)
+  - name: 🏗️ macOS Mojave / 10.14 (Debug)
     if: tag IS NOT present
     os: osx
     osx_image: xcode11
@@ -182,7 +182,7 @@ jobs:
     before_cache:
     - brew cleanup
 
-  - name: macOS Mojave / 10.14 (Release)
+  - name: 🏗️ macOS Mojave / 10.14 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: osx
     osx_image: xcode11
@@ -199,20 +199,20 @@ jobs:
         - qt
         - xz
         update: true
-    script: bash ./.ci/travis-compile.sh --server --package "macos$OSX_VERSION" --release --zip
+    script: bash ./.ci/travis-compile.sh --server --package "$NAME" --release --zip
     before_cache:
     - brew cleanup
 
 
   #Windows
   #https://docs.travis-ci.com/user/reference/windows/
-  - name: Windows Server 10 / 1803 (Debug)
+  - name: 🏗️ Windows Server 10 / 1803 (Debug)
     if: tag IS NOT present
     os: windows
     cache: true
     script: bash ./.ci/travis-compile.sh --server --install --debug
 
-  - name: Windows Server 10 / 1803 (Release)
+  - name: 🏗️ Windows Server 10 / 1803 (Release)
     if: (branch = master AND NOT type = pull_request) OR tag IS present
     os: windows
     env: NAME=win
@@ -225,16 +225,17 @@ jobs:
 
     #add allowed-to-fail to make it run even if there is a problem with one of the builds?
     #debug? docker?
-    name: Unit Tests
+    name: 🔬 Unit Tests
     if: tag IS NOT present
     os: linux
     group: stable
     script: bash ./.ci/travis-compile.sh --server --test
 
+
   - stage: Deploy  👨‍✈️
     #more emoji ideas: 🚀 📦 🚢 🛳️ 👨‍🚀🚁🛫✈️
 
-    name: flatpak (hosted @ Flathub)
+    name: 📦 flatpak (hosted @ Flathub)
     if: (branch = master AND NOT type = pull_request) AND tag IS present
     os: linux
     group: stable
@@ -242,7 +243,7 @@ jobs:
 # script --> flatpak @flathub
 # send PR/commit change? to flathub repo: https://github.com/flathub/io.github.Cockatrice.cockatrice
 
-  - name: GitHub Releases
+  - name: 📦 GitHub Releases
     if: (branch = master AND NOT type = pull_request) AND tag IS present
     os: linux
     group: stable
@@ -250,7 +251,7 @@ jobs:
 # only check if release is created and files got deployed and uploaded correctly from former builds
 # test downloads
 
-  - name: GitHub Pages
+  - name: 📦 GitHub Pages
     if: (branch = master AND NOT type = pull_request) AND tag IS present
     os: linux
     group: stable
@@ -267,39 +268,43 @@ jobs:
 #    group: stable
 #    script: 
 
+
+
+# former deploy section
+
 # Builds for pull requests skip the deployment step altogether
-deploy:
+#deploy:
 # Deploy configuration for "beta" releases
-  - provider: releases
-    token:
-      secure: mLMF41q7xgOR1sjczsilEy7HQis2PkZCzhfOGbn/8FoOQnmmPOZjrsdhn06ZSl3SFsbfCLuClDYXAbFscQmdgjcGN5AmHV+JYfW650QEuQa/f4/lQFsVRtEqUA1O3FQ0OuRxdpCfJubZBdFVH8SbZ93GLC5zXJbkWQNq+xCX1fU=
-    name: "Cockatrice $TRAVIS_TAG"
-    release_notes: "Beta release of Cockatrice"
-    file_glob: true
-    file: "build/Cockatrice-*"
-    overwrite: true
-    draft: false
-    prerelease: true
-    on:
-      tags: true
-      repo: Cockatrice/Cockatrice
-      branch: master
-      condition: $TRAVIS_TAG =~ ([0-9]|[1-9][0-9])(\.([0-9]|[1-9][0-9])){2}-beta(\.([2-9]|[1-9][0-9]))?$     # regex to match semver naming convention for beta pre-releases
+#  - provider: releases
+#    token:
+#      secure: mLMF41q7xgOR1sjczsilEy7HQis2PkZCzhfOGbn/8FoOQnmmPOZjrsdhn06ZSl3SFsbfCLuClDYXAbFscQmdgjcGN5AmHV+JYfW650QEuQa/f4/lQFsVRtEqUA1O3FQ0OuRxdpCfJubZBdFVH8SbZ93GLC5zXJbkWQNq+xCX1fU=
+#    name: "Cockatrice $TRAVIS_TAG"
+#    release_notes: "Beta release of Cockatrice"
+#    file_glob: true
+#    file: "build/Cockatrice-*"
+#    overwrite: true
+#    draft: false
+#    prerelease: true
+#    on:
+#      tags: true
+#      repo: Cockatrice/Cockatrice
+#      branch: master
+#      condition: $TRAVIS_TAG =~ ([0-9]|[1-9][0-9])(\.([0-9]|[1-9][0-9])){2}-beta(\.([2-9]|[1-9][0-9]))?$     # regex to match semver naming convention for beta pre-releases
 
 # Deploy configuration for "stable" releases
-  - provider: releases
-    token:
-      secure: mLMF41q7xgOR1sjczsilEy7HQis2PkZCzhfOGbn/8FoOQnmmPOZjrsdhn06ZSl3SFsbfCLuClDYXAbFscQmdgjcGN5AmHV+JYfW650QEuQa/f4/lQFsVRtEqUA1O3FQ0OuRxdpCfJubZBdFVH8SbZ93GLC5zXJbkWQNq+xCX1fU=
-    file_glob: true
-    file: "build/Cockatrice-*"
-    overwrite: true
-    draft: false
-    prerelease: false
-    on:
-      tags: true
-      repo: Cockatrice/Cockatrice
-      branch: master
-      condition: $TRAVIS_TAG =~ ([0-9]|[1-9][0-9])(\.([0-9]|[1-9][0-9])){2}$    # regex to match semver naming convention for stable full releases
+#  - provider: releases
+#    token:
+#      secure: mLMF41q7xgOR1sjczsilEy7HQis2PkZCzhfOGbn/8FoOQnmmPOZjrsdhn06ZSl3SFsbfCLuClDYXAbFscQmdgjcGN5AmHV+JYfW650QEuQa/f4/lQFsVRtEqUA1O3FQ0OuRxdpCfJubZBdFVH8SbZ93GLC5zXJbkWQNq+xCX1fU=
+#    file_glob: true
+#    file: "build/Cockatrice-*"
+#    overwrite: true
+#    draft: false
+#    prerelease: false
+#    on:
+#      tags: true
+#      repo: Cockatrice/Cockatrice
+#      branch: master
+#      condition: $TRAVIS_TAG =~ ([0-9]|[1-9][0-9])(\.([0-9]|[1-9][0-9])){2}$    # regex to match semver naming convention for stable full releases
 
 
 notifications:
