@@ -9,10 +9,10 @@ jobs:
 
 #https://docs.travis-ci.com/user/build-stages/
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
-  - stage: Access Control / Background Check ...
-    #more emoji ideas: 
+  - stage: Access Control / Background Check / Guard / Keeper / Watchdog... 💂
+    #more emoji ideas: 💂 / 🐺🛡️
 
-    name: Bouncer: "Can I See Your ID?" (Relevant files changed, or skip CI?)
+    name: 🖐️ Relevant files changed, or skip CI?
     if: tag IS NOT present
     os: linux
     group: stable
