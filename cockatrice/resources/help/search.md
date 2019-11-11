@@ -1,7 +1,9 @@
-## Syntax Help
+## Search Bar Syntax Help
 -----
 The search bar recognizes a set of special commands similar to some other card databases. Here is a list with examples. Each entry can be clicked to test the query and has a small explanation. Note that all searches are case insensitive.
+
 <dl>
+  
 <dt>Name:</dt>
 <dd>[birds of paradise](#birds of paradise) <small>(Any card name containing the words birds, of, and paradise)</small></dd>
 <dd>["birds of paradise"](#%22birds of paradise%22) <small>(Any card name containing the exact phrase "birds of paradise")</small></dd>
@@ -48,6 +50,8 @@ The search bar recognizes a set of special commands similar to some other card d
 <dd>[set:lea](#set:lea) <small>(Cards that appear in Alpha, which has the set code LEA)</small></dd>
 <dd>[e:lea,leb](#e:lea,leb) <small>(Cards that appear in Alpha or Beta)</small></dd>
 <dd><a href="#e:lea,leb -(e:lea e:leb)">e:lea,leb -(e:lea e:leb)</a> <small>(Cards that appear in Alpha or Beta but not in both editions)</small></dd>
+
+<br>
 
 <dt>Inverse:</dt>
 <dd>[c:wu -c:m](#c:wu -c:m) <small>(Any card that is white or blue, but not multicolored)</small></dd>
