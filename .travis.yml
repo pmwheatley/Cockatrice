@@ -11,6 +11,7 @@ jobs:
 #https://docs.travis-ci.com/user/conditional-builds-stages-jobs/
   - stage: Access Control / Background Check / Guard / Keeper / Watchdog... 💂
     #more emoji ideas: 💂 / 🐺🛡️
+    #run in same stage with lint etc. in parallel to save some time?
 
     name: 🖐️ Relevant files changed, or skip CI?
     if: tag IS NOT present
@@ -25,6 +26,7 @@ jobs:
     name: 🔍 Source Code Style & Error Checking (Lint)
     if: tag IS NOT present
     os: linux
+    dist: bionic
     group: stable
     script: bash ./.ci/travis-lint.sh
     
