@@ -55,6 +55,7 @@ Server_Game::Server_Game(const ServerInfo_User &_creatorInfo,
                          const QList<int> &_gameTypes,
                          bool _onlyBuddies,
                          bool _onlyRegistered,
+                         bool _respectIgnoreLists,
                          bool _spectatorsAllowed,
                          bool _spectatorsNeedPassword,
                          bool _spectatorsCanTalk,
@@ -63,7 +64,7 @@ Server_Game::Server_Game(const ServerInfo_User &_creatorInfo,
     : QObject(), room(_room), nextPlayerId(0), hostId(0), creatorInfo(new ServerInfo_User(_creatorInfo)),
       gameStarted(false), gameClosed(false), gameId(_gameId), password(_password), maxPlayers(_maxPlayers),
       gameTypes(_gameTypes), activePlayer(-1), activePhase(-1), onlyBuddies(_onlyBuddies),
-      onlyRegistered(_onlyRegistered), spectatorsAllowed(_spectatorsAllowed),
+      onlyRegistered(_onlyRegistered), respectIgnoreLists(_respectIgnoreLists), spectatorsAllowed(_spectatorsAllowed),
       spectatorsNeedPassword(_spectatorsNeedPassword), spectatorsCanTalk(_spectatorsCanTalk),
       spectatorsSeeEverything(_spectatorsSeeEverything), inactivityCounter(0), startTimeOfThisGame(0),
       secondsElapsed(0), firstGameStarted(false), turnOrderReversed(false), startTime(QDateTime::currentDateTime()),
@@ -768,6 +769,7 @@ void Server_Game::getInfo(ServerInfo_Game &result) const
         result.mutable_creator_info()->CopyFrom(*getCreatorInfo());
         result.set_only_buddies(onlyBuddies);
         result.set_only_registered(onlyRegistered);
+        result.set_respect_ignore_lists(respectIgnoreLists);
         result.set_spectators_allowed(getSpectatorsAllowed());
         result.set_spectators_need_password(getSpectatorsNeedPassword());
         result.set_spectators_can_chat(spectatorsCanTalk);

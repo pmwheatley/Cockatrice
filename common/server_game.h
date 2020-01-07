@@ -60,7 +60,7 @@ private:
     int maxPlayers;
     QList<int> gameTypes;
     int activePlayer, activePhase;
-    bool onlyBuddies, onlyRegistered;
+    bool onlyBuddies, onlyRegistered, respectIgnoreLists;
     bool spectatorsAllowed;
     bool spectatorsNeedPassword;
     bool spectatorsCanTalk;
@@ -96,6 +96,7 @@ public:
                 const QList<int> &_gameTypes,
                 bool _onlyBuddies,
                 bool _onlyRegistered,
+                bool _respectIgnoreLists,
                 bool _spectatorsAllowed,
                 bool _spectatorsNeedPassword,
                 bool _spectatorsCanTalk,
