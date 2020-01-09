@@ -898,6 +898,12 @@ void SettingsCache::setOnlyRegistered(const bool _onlyRegistered)
     settings->setValue("game/onlyregistered", onlyRegistered);
 }
 
+void SettingsCache::setRespectIgnoreLists(const bool _respectIgnoreLists)
+{
+    respectIgnoreLists = _respectIgnoreLists;
+    settings->setValue("game/respectignorelists", respectIgnoreLists);
+}
+
 void SettingsCache::setSpectatorsAllowed(const bool _spectatorsAllowed)
 {
     spectatorsAllowed = _spectatorsAllowed;

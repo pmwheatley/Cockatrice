@@ -66,12 +66,14 @@ void DlgCreateGame::sharedCtor()
         onlyBuddiesCheckBox->setEnabled(false);
         onlyRegisteredCheckBox->setEnabled(false);
     }
+    respectIgnoreListsCheckBox = new QCheckBox(tr("Respect &ignore lists"));
 
     QGridLayout *joinRestrictionsLayout = new QGridLayout;
     joinRestrictionsLayout->addWidget(passwordLabel, 0, 0);
     joinRestrictionsLayout->addWidget(passwordEdit, 0, 1);
     joinRestrictionsLayout->addWidget(onlyBuddiesCheckBox, 1, 0, 1, 2);
     joinRestrictionsLayout->addWidget(onlyRegisteredCheckBox, 2, 0, 1, 2);
+    joinRestrictionsLayout->addWidget(respectIgnoreListsCheckBox, 3, 0, 1, 2);
 
     QGroupBox *joinRestrictionsGroupBox = new QGroupBox(tr("Joining restrictions"));
     joinRestrictionsGroupBox->setLayout(joinRestrictionsLayout);
@@ -124,6 +126,7 @@ DlgCreateGame::DlgCreateGame(TabRoom *_room, const QMap<int, QString> &_gameType
         onlyBuddiesCheckBox->setEnabled(false);
         onlyRegisteredCheckBox->setEnabled(false);
     }
+    respectIgnoreListsCheckBox->setChecked(settingsCache->getRespectIgnoreLists());
     spectatorsAllowedCheckBox->setChecked(settingsCache->getSpectatorsAllowed());
     spectatorsNeedPasswordCheckBox->setChecked(settingsCache->getSpectatorsNeedPassword());
     spectatorsCanTalkCheckBox->setChecked(settingsCache->getSpectatorsCanTalk());
@@ -154,6 +157,7 @@ DlgCreateGame::DlgCreateGame(const ServerInfo_Game &gameInfo, const QMap<int, QS
     passwordEdit->setEnabled(false);
     onlyBuddiesCheckBox->setEnabled(false);
     onlyRegisteredCheckBox->setEnabled(false);
+    respectIgnoreListsCheckBox->setEnabled(false);
     spectatorsAllowedCheckBox->setEnabled(false);
     spectatorsNeedPasswordCheckBox->setEnabled(false);
     spectatorsCanTalkCheckBox->setEnabled(false);
@@ -163,6 +167,7 @@ DlgCreateGame::DlgCreateGame(const ServerInfo_Game &gameInfo, const QMap<int, QS
     maxPlayersEdit->setValue(gameInfo.max_players());
     onlyBuddiesCheckBox->setChecked(gameInfo.only_buddies());
     onlyRegisteredCheckBox->setChecked(gameInfo.only_registered());
+    respectIgnoreListsCheckBox->setChecked(gameInfo.respect_ignore_lists());
     spectatorsAllowedCheckBox->setChecked(gameInfo.spectators_allowed());
     spectatorsNeedPasswordCheckBox->setChecked(gameInfo.spectators_need_password());
     spectatorsCanTalkCheckBox->setChecked(gameInfo.spectators_can_chat());
@@ -194,6 +199,7 @@ void DlgCreateGame::actReset()
     passwordEdit->setText("");
     onlyBuddiesCheckBox->setChecked(false);
     onlyRegisteredCheckBox->setChecked(room && room->getUserInfo()->user_level() & ServerInfo_User::IsRegistered);
+    respectIgnoreListsCheckBox->setChecked(false);
 
     spectatorsAllowedCheckBox->setChecked(true);
     spectatorsNeedPasswordCheckBox->setChecked(false);
@@ -220,6 +226,7 @@ void DlgCreateGame::actOK()
     cmd.set_max_players(maxPlayersEdit->value());
     cmd.set_only_buddies(onlyBuddiesCheckBox->isChecked());
     cmd.set_only_registered(onlyRegisteredCheckBox->isChecked());
+    cmd.set_respect_ignore_lists(respectIgnoreListsCheckBox->isChecked());
     cmd.set_spectators_allowed(spectatorsAllowedCheckBox->isChecked());
     cmd.set_spectators_need_password(spectatorsNeedPasswordCheckBox->isChecked());
     cmd.set_spectators_can_talk(spectatorsCanTalkCheckBox->isChecked());
@@ -242,6 +249,7 @@ void DlgCreateGame::actOK()
         settingsCache->setMaxPlayers(maxPlayersEdit->value());
         settingsCache->setOnlyBuddies(onlyBuddiesCheckBox->isChecked());
         settingsCache->setOnlyRegistered(onlyRegisteredCheckBox->isChecked());
+        settingsCache->setRespectIgnoreLists(respectIgnoreListsCheckBox->isChecked());
         settingsCache->setSpectatorsAllowed(spectatorsAllowedCheckBox->isChecked());
         settingsCache->setSpectatorsNeedPassword(spectatorsNeedPasswordCheckBox->isChecked());
         settingsCache->setSpectatorsCanTalk(spectatorsCanTalkCheckBox->isChecked());

@@ -118,6 +118,7 @@ private:
     QString gameTypes;
     bool onlyBuddies;
     bool onlyRegistered;
+    bool respectIgnoreLists;
     bool spectatorsAllowed;
     bool spectatorsNeedPassword;
     bool spectatorsCanTalk;
@@ -372,6 +373,10 @@ public:
     {
         return onlyRegistered;
     }
+    bool getRespectIgnoreLists() const
+    {
+        return respectIgnoreLists;
+    }
     bool getSpectatorsAllowed() const
     {
         return spectatorsAllowed;
@@ -511,6 +516,7 @@ public slots:
     void setGameTypes(const QString _gameTypes);
     void setOnlyBuddies(const bool _onlyBuddies);
     void setOnlyRegistered(const bool _onlyRegistered);
+    void setRespectIgnoreLists(const bool _respectIgnoreLists);
     void setSpectatorsAllowed(const bool _spectatorsAllowed);
     void setSpectatorsNeedPassword(const bool _spectatorsNeedPassword);
     void setSpectatorsCanTalk(const bool _spectatorsCanTalk);
