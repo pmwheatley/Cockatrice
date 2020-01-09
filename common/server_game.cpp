@@ -401,9 +401,20 @@ Response::ResponseCode Server_Game::checkJoin(ServerInfo_User *user,
     Server_DatabaseInterface *databaseInterface = room->getServer()->getDatabaseInterface();
     {
         QMapIterator<int, Server_Player *> playerIterator(players);
-        while (playerIterator.hasNext())
-            if (playerIterator.next().value()->getUserInfo()->name() == user->name())
+        while (playerIterator.hasNext()) {
+            Server_Player *player = playerIterator.next().value();
+            if (player->getUserInfo()->name() == user->name()) {
                 return Response::RespContextError;
+            }
+
+            if (respectIgnoreLists) {
+                if (databaseInterface->isInIgnoreList(
+                        QString::fromStdString(player->getUserInfo()->name()),
+                        QString::fromStdString(user->name()))) {
+                    return Response::RespInIgnoreList;
+                }
+            }
+        }
     }
 
     if (asJudge && !(user->user_level() & ServerInfo_User::IsJudge)) {
