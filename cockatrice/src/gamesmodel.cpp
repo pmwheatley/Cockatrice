@@ -128,6 +128,8 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const
                         result.append(tr("buddies only"));
                     if (g.only_registered())
                         result.append(tr("reg. users only"));
+                    if (g.respect_ignore_lists())
+                        result.append(tr("respect ignore lists"));
                     return result.join(", ");
                 }
                 case Qt::DecorationRole: {
