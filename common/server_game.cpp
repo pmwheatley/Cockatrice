@@ -427,7 +427,7 @@ Response::ResponseCode Server_Game::checkJoin(ServerInfo_User *user,
                 if (databaseInterface->isInIgnoreList(
                         QString::fromStdString(playerIterator.next().value()->getUserInfo()->name()),
                     QString::fromStdString(user->name()))) {
-                    return Response::RespInIgnoreList;
+                    return Response::RespCreatorRespectsIgnoreLists;
                 }
             }
         }
