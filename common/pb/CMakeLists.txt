@@ -78,6 +78,7 @@ SET(PROTO_FILES
     event_game_say.proto
     event_game_state_changed.proto
     event_join.proto
+    event_join_ignored.proto
     event_join_room.proto
     event_kicked.proto
     event_leave.proto

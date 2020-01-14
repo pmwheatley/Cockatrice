@@ -399,6 +399,13 @@ void MessageLogWidget::logJoin(Player *player)
     appendHtmlServerMessage(tr("%1 has joined the game.").arg(sanitizeHtml(player->getName())));
 }
 
+void MessageLogWidget::logJoinIgnored(QString name)
+{
+    soundEngine->playSound("player_leave");
+    appendHtmlServerMessage(tr("%1 attempted to join the game, but is on another player's ignore list.").arg(sanitizeHtml(name)));
+}
+
+
 void MessageLogWidget::logJoinSpectator(QString name)
 {
     soundEngine->playSound("spectator_join");

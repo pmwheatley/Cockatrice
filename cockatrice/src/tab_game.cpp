@@ -849,6 +849,9 @@ void TabGame::processGameEventContainer(const GameEventContainer &cont, Abstract
                 case GameEvent::JOIN:
                     eventJoin(event.GetExtension(Event_Join::ext), playerId, context);
                     break;
+                case GameEvent::GAME_JOIN_IGNORED:
+                    eventJoinIgnored(event.GetExtension(Event_Join_Ignored::ext), playerId, context);
+                    break;
                 case GameEvent::LEAVE:
                     eventLeave(event.GetExtension(Event_Leave::ext), playerId, context);
                     break;
@@ -1148,6 +1151,14 @@ void TabGame::eventPlayerPropertiesChanged(const Event_PlayerPropertiesChanged &
         }
         default:;
     }
+}
+
+void TabGame::eventJoinIgnored(const Event_Join_Ignored &event, int /*eventPlayerId*/, const GameEventContext & /*context*/)
+{
+    const ServerInfo_PlayerProperties &playerInfo = event.player_properties();
+    const int playerId = playerInfo.player_id();
+    QString playerName = QString::fromStdString(playerInfo.user_info().name());
+    messageLog->logJoinIgnored(playerName);
 }
 
 void TabGame::eventJoin(const Event_Join &event, int /*eventPlayerId*/, const GameEventContext & /*context*/)

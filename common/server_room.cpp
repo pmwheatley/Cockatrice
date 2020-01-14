@@ -1,5 +1,6 @@
 #include "server_room.h"
 #include "server_game.h"
+#include "server_player.h"
 #include "server_protocolhandler.h"
 #include <QDateTime>
 #include <QDebug>
@@ -13,6 +14,7 @@
 #include "pb/serverinfo_chat_message.pb.h"
 #include "pb/serverinfo_room.pb.h"
 #include <google/protobuf/descriptor.h>
+#include <common/pb/event_join_ignored.pb.h>
 
 Server_Room::Server_Room(int _id,
                          int _chatHistorySize,
@@ -265,6 +267,13 @@ Response::ResponseCode Server_Room::processJoinGameCommand(const Command_JoinGam
                                                  cmd.spectator(), cmd.override_restrictions(), cmd.join_as_judge());
     if (result == Response::RespOk)
         g->addPlayer(userInterface, rc, cmd.spectator(), cmd.join_as_judge());
+
+    if (result == Response::RespCreatorRespectsIgnoreLists) {
+        Event_Join_Ignored joinIgnored;
+        Server_Player *ignoredPlayer = new Server_Player(g, -1, userInterface->copyUserInfo(true, true, true), false, false, userInterface);
+        ignoredPlayer->getProperties(*joinIgnored.mutable_player_properties(), true);
+        g->sendGameEventContainer(g->prepareGameEvent(joinIgnored, -1));
+    }
 
     return result;
 }

@@ -8,6 +8,7 @@
 #include <QCompleter>
 #include <QMap>
 #include <QPushButton>
+#include <common/pb/event_join_ignored.pb.h>
 
 class AbstractClient;
 class CardDatabase;
@@ -186,6 +187,7 @@ private:
                                       int eventPlayerId,
                                       const GameEventContext &context);
     void eventJoin(const Event_Join &event, int eventPlayerId, const GameEventContext &context);
+    void eventJoinIgnored(const Event_Join_Ignored &event, int eventPlayerId, const GameEventContext &context);
     void eventLeave(const Event_Leave &event, int eventPlayerId, const GameEventContext &context);
     void eventKicked(const Event_Kicked &event, int eventPlayerId, const GameEventContext &context);
     void eventGameHostChanged(const Event_GameHostChanged &event, int eventPlayerId, const GameEventContext &context);

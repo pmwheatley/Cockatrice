@@ -9,6 +9,7 @@ message GameEvent {
         GAME_STATE_CHANGED = 1005;
         PLAYER_PROPERTIES_CHANGED = 1007;
         GAME_SAY = 1009;
+        GAME_JOIN_IGNORED = 1010;
         CREATE_ARROW = 2000;
         DELETE_ARROW = 2001;
         CREATE_COUNTER = 2002;

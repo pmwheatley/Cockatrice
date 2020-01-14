@@ -61,6 +61,7 @@ public slots:
     void logGameClosed();
     void logGameStart();
     void logJoin(Player *player);
+    void logJoinIgnored(QString name);
     void logJoinSpectator(QString name);
     void logKicked();
     void logLeave(Player *player, QString reason);
