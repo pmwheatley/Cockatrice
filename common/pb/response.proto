@@ -40,6 +40,7 @@ message Response {
         RespClientUpdateRequired = 35; // Client is missing features that the server is requiring
         RespServerFull = 36; // Server user limit reached
         RespEmailBlackListed = 37; // Server has blacklisted the email address provided for registration
+        RespCreatorRespectsIgnoreLists = 38;    // Creator of the game respects the ignore lists of _all_ players
     }
     enum ResponseType {
         JOIN_ROOM = 1000;

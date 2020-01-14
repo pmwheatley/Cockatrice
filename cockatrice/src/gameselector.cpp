@@ -176,7 +176,10 @@ void GameSelector::checkResponse(const Response &response)
             QMessageBox::critical(this, tr("Error"), tr("This game is only open to its creator's buddies."));
             break;
         case Response::RespInIgnoreList:
-            QMessageBox::critical(this, tr("Error"), tr("One or more of the players in this game have you on their ignore list."));
+            QMessageBox::critical(this, tr("Error"), tr("You are being ignored by the creator of this game."));
+            break;
+        case Response::RespCreatorRespectsIgnoreLists:
+            QMessageBox::critical(this, tr("Error"), tr("One or more of the players in this game have you on their ignore list, and the game creator has chosen to respect those."));
             break;
         default:;
     }
